@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Pertanyaan 4u</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Poppins & Inter untuk kesan bersih dan modern -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f9f3f5 0%, #f0e9ef 100%);
+            font-family: 'Inter', 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Decorative background elements - subtle shapes */
+        .bg-shape {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: 0;
+            opacity: 0.4;
+        }
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: #ffc4d0;
+            top: -100px;
+            left: -100px;
+        }
+        .shape-2 {
+            width: 400px;
+            height: 400px;
+            background: #b8d9ff;
+            bottom: -150px;
+            right: -100px;
+        }
+        .shape-3 {
+            width: 200px;
+            height: 200px;
+            background: #ffe0a3;
+            bottom: 20%;
+            left: 20%;
+        }
+
+        /* Main card container */
+        .card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05), 0 5px 12px rgba(0, 0, 0, 0.03);
+            width: 100%;
+            max-width: 560px;
+            padding: 2.2rem 2rem 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        /* Pages transition */
+        .page {
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+        .hidden-page {
+            display: none;
+        }
+
+        /* Typography - refined */
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #3b2c34;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.5rem;
+        }
+        .subhead {
+            color: #8d6b7a;
+            font-weight: 400;
+            font-size: 0.95rem;
+            margin-bottom: 1.8rem;
+        }
+        .soft-text {
+            color: #6e4c5c;
+            background: rgba(245, 235, 240, 0.7);
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Love button (landing) */
+        .icon-btn {
+            background: linear-gradient(135deg, #ff9bb0, #ff7b9c);
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1.5rem auto;
+            cursor: pointer;
+            box-shadow: 0 15px 25px rgba(255, 80, 120, 0.2);
+            transition: all 0.25s ease;
+            border: none;
+            color: white;
+        }
+        .icon-btn i {
+            font-size: 4rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        .icon-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 30px rgba(255, 60, 100, 0.25);
+        }
+        .icon-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* Proposal text box */
+        .proposal-card {
+            background: #fef8fa;
+            border-radius: 2rem;
+            padding: 1.5rem 1.2rem;
+            margin: 1.5rem 0 1.8rem;
+            border: 1px solid #ffdee6;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.02);
+        }
+        .proposal-text {
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: #3b2c34;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+        .proposal-text i {
+            color: #ff7b9c;
+            font-size: 1.6rem;
+        }
+
+        /* Button area */
+        .buttons-area {
+            position: relative;
+            min-height: 110px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            padding: 0.8rem 0.5rem;
+        }
+        .btn {
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 3rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        .btn-yes {
+            background: #ff7b9c;
+            color: white;
+            border: 1px solid #ff9eb5;
+            box-shadow: 0 5px 0 #b34e6a;
+        }
+        .btn-yes:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #b34e6a;
+        }
+        .btn-no {
+            background: #e9e0e4;
+            color: #6e4c5c;
+            border: 1px solid #d9cbd1;
+            box-shadow: 0 5px 0 #c7b4bd;
+            transition: transform 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .btn-no:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #c7b4bd;
+        }
+
+        /* Success page */
+        .success-icon {
+            font-size: 4rem;
+            color: #ff7b9c;
+            margin-bottom: 1rem;
+        }
+        .happy-message {
+            background: #fef3e8;
+            border-radius: 2rem;
+            padding: 1.8rem;
+            margin: 1.5rem 0;
+            border-left: 5px solid #ff7b9c;
+            text-align: left;
+        }
+        .happy-message p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: #3b2c34;
+            font-weight: 500;
+        }
+        .btn-share {
+            background: #25D366;
+            color: white;
+            padding: 0.9rem 1.8rem;
+            font-size: 1rem;
+            gap: 0.8rem;
+            border: none;
+            border-radius: 3rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 600;
+            transition: all 0.2s;
+            box-shadow: 0 5px 0 #1b9b4e;
+        }
+        .btn-share:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #1b9b4e;
+        }
+        footer {
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            color: #b393a2;
+            letter-spacing: 0.3px;
+        }
+        i, .fas, .far {
+            pointer-events: none;
+        }
+        @media (max-width: 500px) {
+            .card {
+                padding: 1.5rem;
+            }
+            .proposal-text {
+                font-size: 1.2rem;
+            }
+            .btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 1rem;
+            }
+            .icon-btn {
+                width: 110px;
+                height: 110px;
+            }
+            .icon-btn i {
+                font-size: 3rem;
+            }
+        }
+        /* subtle fade in */
+        @keyframes gentleFade {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .page:not(.hidden-page) {
+            animation: gentleFade 0.4s ease-out;
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-shape shape-1"></div>
+<div class="bg-shape shape-2"></div>
+<div class="bg-shape shape-3"></div>
+
+<div class="card" id="appCard">
+    <!-- LANDING PAGE: klik ikon love di tengah -->
+    <div id="landingPage" class="page">
+        <h2>Halo, <span id="greetName">kamu</span>.</h2>
+        <p class="subhead">Ada sesuatu yang ingin saya sampaikan</p>
+        <div class="icon-btn" id="heartClickBtn">
+            <i class="fas fa-heart"></i>
+        </div>
+        <p class="soft-text"><i class="fas fa-arrow-down" style="margin-right: 6px;"></i> sentuh ikon untuk lanjut</p>
+        <footer>dengan sepenuh hati</footer>
+    </div>
+
+    <!-- PROPOSAL PAGE: bacaan nembak + tombol ya/tidak -->
+    <div id="proposalPage" class="page hidden-page">
+        <h2>Pertanyaan Kecil</h2>
+        <p class="subhead">untuk langkah yang lebih besar</p>
+        <div class="proposal-card">
+            <div class="proposal-text">
+                <i class="fas fa-feather-alt"></i>
+                <span>you make my world better<br> will you be my girlfriend? </span>
+                <i class="fas fa-smile-wink"></i>
+            </div>
+        </div>
+        <div class="buttons-area" id="buttonArea">
+            <button class="btn btn-yes" id="yesButton"><i class="fas fa-check-circle"></i> Ya, mau</button>
+            <button class="btn btn-no" id="noButton"><i class="fas fa-times-circle"></i> Belum yakin</button>
+        </div>
+        <footer><i class="fas fa-arrow-left"></i> pikirkan baik-baik ya</footer>
+    </div>
+
+    <!-- SUCCESS PAGE: senang + share WA -->
+    <div id="successPage" class="page hidden-page">
+        <div class="success-icon">
+            <i class="fas fa-heart-broken" style="opacity: 0; display: none;"></i>
+            <i class="fas fa-heart-circle-check"></i>
+        </div>
+        <h2>Bahagia banget!</h2>
+        <div class="happy-message">
+            <p><i class="fas fa-star" style="color: #ffb347; margin-right: 6px;"></i> Akhirnya kita resmi!</p>
+            <p style="margin-top: 12px;">Makasih ya udah mau nampung saya, hehe. Janji ya kita saling jaga dan sukses bareng. Anyway, saya beneran seneng banget akhirnya bisa bareng kamu lagi 🤍</p>
+        </div>
+        <button class="btn-share" id="shareWaBtn">
+            <i class="fab fa-whatsapp"></i> Bagikan kabar baik
+        </button>
+        <footer><i class="fas fa-heart"></i> untuk masa depan yang indah</footer>
+    </div>
+</div>
+
+<script>
+    // DOM Elements
+    const landing = document.getElementById('landingPage');
+    const proposal = document.getElementById('proposalPage');
+    const success = document.getElementById('successPage');
+    const heartBtn = document.getElementById('heartClickBtn');
+    const yesBtn = document.getElementById('yesButton');
+    const noBtn = document.getElementById('noButton');
+    const shareBtn = document.getElementById('shareWaBtn');
+    const buttonArea = document.getElementById('buttonArea');
+
+    // Helper: membuat efek confetti halus (pakai icon kecil)
+    function gentleConfetti() {
+        const iconList = ['fas fa-heart', 'fas fa-star', 'fas fa-circle', 'fas fa-sparkle'];
+        for (let i = 0; i < 36; i++) {
+            const el = document.createElement('i');
+            const randomIcon = iconList[Math.floor(Math.random() * iconList.length)];
+            el.className = randomIcon;
+            el.style.position = 'fixed';
+            el.style.left = Math.random() * window.innerWidth + 'px';
+            el.style.top = '-20px';
+            el.style.fontSize = (12 + Math.random() * 20) + 'px';
+            el.style.color = `hsl(${Math.random() * 40 + 340}, 70%, 65%)`;
+            el.style.opacity = '0.7';
+            el.style.pointerEvents = 'none';
+            el.style.zIndex = '9999';
+            el.style.transition = 'all 1.2s ease-out';
+            document.body.appendChild(el);
+            const deltaX = (Math.random() - 0.5) * 80;
+            setTimeout(() => {
+                el.style.transform = `translate(${deltaX}px, ${window.innerHeight + 30}px) rotate(${Math.random() * 360}deg)`;
+                el.style.opacity = '0';
+                setTimeout(() => el.remove(), 1200);
+            }, 10);
+        }
+    }
+
+    // Fungsi memindahkan tombol "tidak" secara random namun tetap berada dalam container buttons-area
+    function getRandomPositionWithinParent(btn, parent) {
+        // reset transform dulu agar mendapatkan ukuran dan posisi asli relatif terhadap parent
+        btn.style.transform = 'none';
+        const btnRect = btn.getBoundingClientRect();
+        const parentRect = parent.getBoundingClientRect();
+        
+        // offset relatif saat ini (tanpa transform)
+        let currentLeftRel = btnRect.left - parentRect.left;
+        let currentTopRel = btnRect.top - parentRect.top;
+        const btnWidth = btnRect.width;
+        const btnHeight = btnRect.height;
+        
+        // batas gerakan dalam parent (tidak boleh keluar)
+        const maxLeft = currentLeftRel; // bisa geser ke kiri sampai batas kiri parent (0)
+        const maxRight = (parentRect.width - (currentLeftRel + btnWidth));
+        const maxUp = currentTopRel;
+        const maxDown = (parentRect.height - (currentTopRel + btnHeight));
+        
+        // pastikan ada ruang gerak minimal, jika tidak cukup maka hanya geser sedikit
+        let deltaX = 0, deltaY = 0;
+        if (maxLeft + maxRight > 12) {
+            let rangeX = maxLeft + maxRight;
+            let rawX = (Math.random() * rangeX) - maxLeft;
+            deltaX = rawX;
+            // supaya perpindahan terlihat signifikan (minimal 12px) jika memungkinkan
+            if (Math.abs(deltaX) < 12 && rangeX > 25) {
+                deltaX = deltaX > 0 ? 15 : -15;
+                if (deltaX > maxRight) deltaX = maxRight - 4;
+                if (deltaX < -maxLeft) deltaX = -maxLeft + 4;
+            }
+        }
+        if (maxUp + maxDown > 12) {
+            let rangeY = maxUp + maxDown;
+            let rawY = (Math.random() * rangeY) - maxUp;
+            deltaY = rawY;
+            if (Math.abs(deltaY) < 12 && rangeY > 25) {
+                deltaY = deltaY > 0 ? 14 : -14;
+                if (deltaY > maxDown) deltaY = maxDown - 4;
+                if (deltaY < -maxUp) deltaY = -maxUp + 4;
+            }
+        }
+        return { x: deltaX, y: deltaY };
+    }
+
+    let moveTimeout = null;
+    function moveNoButton() {
+        if (!noBtn || !buttonArea) return;
+        // agar tidak terlalu heboh, batasi frekuensi pindah saat diklik cepat
+        if (moveTimeout) clearTimeout(moveTimeout);
+        const { x, y } = getRandomPositionWithinParent(noBtn, buttonArea);
+        noBtn.style.transition = 'transform 0.18s cubic-bezier(0.2, 0.9, 0.6, 1.1)';
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+        // efek tambahan: sedikit "getar" pada tombol
+        noBtn.style.transform += ` scale(0.98)`;
+        moveTimeout = setTimeout(() => {
+            if (noBtn) {
+                // mengembalikan scale, namun tetap pertahankan posisi translasi
+                const currentTrans = noBtn.style.transform;
+                if (currentTrans && currentTrans.includes('scale')) {
+                    const newTrans = currentTrans.replace(' scale(0.98)', '');
+                    noBtn.style.transform = newTrans;
+                }
+            }
+        }, 120);
+        // buat efek floating mini icon (tanpa emoji)
+        createMiniFloatIcon();
+    }
+    
+    function createMiniFloatIcon() {
+        const icon = document.createElement('i');
+        icon.className = 'fas fa-heart';
+        icon.style.position = 'fixed';
+        icon.style.left = (noBtn.getBoundingClientRect().left + noBtn.offsetWidth/2) + 'px';
+        icon.style.top = (noBtn.getBoundingClientRect().top - 12) + 'px';
+        icon.style.fontSize = '20px';
+        icon.style.color = '#ff9bb0';
+        icon.style.opacity = '0.8';
+        icon.style.pointerEvents = 'none';
+        icon.style.zIndex = '999';
+        icon.style.transition = 'all 0.5s ease';
+        document.body.appendChild(icon);
+        setTimeout(() => {
+            icon.style.transform = 'translateY(-30px) scale(0.5)';
+            icon.style.opacity = '0';
+            setTimeout(() => icon.remove(), 500);
+        }, 20);
+    }
+
+    // Handler tombol TIDAK
+    function onNoClick(e) {
+        e.stopPropagation();
+        moveNoButton();
+    }
+
+    // Handler tombol YA -> pindah ke halaman sukses
+    function onYesClick() {
+        proposal.classList.add('hidden-page');
+        success.classList.remove('hidden-page');
+        gentleConfetti();
+        // reset posisi tombol tidak jika suatu saat kembali (tapi tidak kembali, tapi tetap aman)
+        if (noBtn) noBtn.style.transform = 'none';
+    }
+
+    // Klik LOVE di landing
+    function onHeartClick() {
+        landing.classList.add('hidden-page');
+        proposal.classList.remove('hidden-page');
+        // reset tombol tidak ke posisi awal (tanpa translate)
+        if (noBtn) {
+            noBtn.style.transform = 'none';
+            noBtn.style.transition = '';
+        }
+        // efek konfeti kecil
+        for(let i=0;i<8;i++) createMiniFloatIcon();
+    }
+
+    // Share WA dengan pesan yang lebih dewasa & tidak alay
+    function shareToWhatsApp() {
+        const phone = "6283896117859";
+        const message = `saya terima, gass pacaran lagi💕`;
+        const encodedMsg = encodeURIComponent(message);
+        const waUrl = `https://wa.me/${phone}?text=${encodedMsg}`;
+        window.open(waUrl, '_blank');
+    }
+
+    // Event listeners
+    heartBtn.addEventListener('click', onHeartClick);
+    yesBtn.addEventListener('click', onYesClick);
+    noBtn.addEventListener('click', onNoClick);
+    if (shareBtn) shareBtn.addEventListener('click', shareToWhatsApp);
+
+    // Saat resize, pastikan tombol tidak tidak keluar dari area (jika proposal masih aktif)
+    function resetNoButtonBoundary() {
+        if (!proposal.classList.contains('hidden-page') && noBtn && noBtn.style.transform && noBtn.style.transform !== 'none') {
+            // cek apakah tombol masih dalam parent secara visual
+            const btnRect = noBtn.getBoundingClientRect();
+            const parentRect = buttonArea.getBoundingClientRect();
+            const isInside = (btnRect.left >= parentRect.left - 3 && btnRect.right <= parentRect.right + 3 &&
+                              btnRect.top >= parentRect.top - 3 && btnRect.bottom <= parentRect.bottom + 3);
+            if (!isInside) {
+                noBtn.style.transform = 'none';
+                noBtn.style.transition = '';
+            }
+        }
+    }
+    window.addEventListener('resize', () => {
+        resetNoButtonBoundary();
+    });
+
+    // Prevent tombol tidak dari double transform berlebihan
+    // Siapkan juga nama panggilan opsional (tanpa alay)
+    const urlParams = new URLSearchParams(window.location.search);
+    const nama = urlParams.get('nama') || 'kamu';
+    const greetSpan = document.getElementById('greetName');
+    if (greetSpan) greetSpan.innerText = nama;
+    
+    // tambahkan sentuhan halus: saat hover tombol tidak sedikit "goyang" tapi tidak pindah permanen
+    if (noBtn) {
+        noBtn.addEventListener('mouseenter', () => {
+            if (!proposal.classList.contains('hidden-page')) {
+                noBtn.style.transition = 'transform 0.08s';
+                noBtn.style.transform = `translate(${Math.random() * 6 - 3}px, ${Math.random() * 6 - 3}px)`;
+                setTimeout(() => {
+                    if (noBtn && !proposal.classList.contains('hidden-page')) {
+                        // jangan reset jika transform sudah diubah karena klik? biarkan saja, hanya efek hover ringan
+                        if (noBtn.style.transform && !noBtn.style.transform.includes('scale')) {
+                            // tapi jika tidak ada perubahan dari klik, kembalikan ke posisi terakhir yang tersimpan? lebih baik tetap pertahankan posisi asli/terakhir
+                            // supaya tidak mengganggu, kita simpan posisi setelah hover kembali ke transform sebelumnya (jika ada translate dari move)
+                            // biar tidak rusak, kita tidak mengubah jika sudah ada translate dari move sebelumnya
+                        }
+                    }
+                }, 100);
+            }
+        });
+    }
+
+    // Pastikan initial tidak ada konflik
+    console.log("✨ Website siap dengan sentuhan lembut");
+</script>
+</body>
+</html>
